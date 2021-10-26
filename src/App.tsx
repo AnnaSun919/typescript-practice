@@ -18,25 +18,54 @@ function addnote(event : React.FormEvent){
 
 }
 
-function reset(event : React.FormEvent){
-  event.preventDefault();
+const reset = (event: React.FormEvent) =>{
+  event.preventDefault()
   textInputRef.current!.value =""
-
 }
 
-
-
-
   return<>
+  <div className="page">
+    <div className="addNotesContainer">
   <form onSubmit={addnote}>
-  <label htmlFor="comment">Comment</label>
+  <label htmlFor="comment">Note</label>
           <input ref={textInputRef}/>
-      
           <button>add note</button>
           <button onClick={reset} type="button">reset</button>
  </form>
+ 
 
- <div className="notes">{state.map((note,index)=> <div key={index}>{note.note}</div>)}</div>
+ <div className="notesContainer">{state.map((note,index)=> <div className="notes" key={index}>{note.note}</div>)}</div>
+ </div>
+
+ <div className="category">
+ <table >
+  <tr >
+    <th>Plan</th>
+  </tr>
+  <tr>
+  <th className="Plan"></th>
+  </tr>
+</table>
+
+<table >
+  <tr >
+    <th>Processing</th>
+  </tr>
+  <tr>
+  <th className="Plan"></th>
+  </tr>
+</table>
+
+<table >
+  <tr >
+    <th>Finished</th>
+  </tr>
+  <tr>
+  <th className="Plan"></th>
+  </tr>
+</table>
+ </div>
+ </div>
   </>
 }
 

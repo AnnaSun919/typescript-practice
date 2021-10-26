@@ -1,1 +1,2 @@
-## TypeScript and react practice
+Basic React and TypeScript Practices
+

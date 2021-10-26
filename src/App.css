@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+.page{
+
+  display: flex;
+  flex-direction: row;
+}
+
+.addNotesContainer{
+  width: 50vh;
+}
+
+.notes{
+  background-color: rgba(250, 250, 182, 0.938);
+  min-height: 100px;
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+
+}
+
+.category{
+display: flex;
+justify-content: space-evenly;
+}
+
+
+table{
+  border-collapse: collapse;
+  margin: 25px;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 300px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+th{
+  /* border: 1px solid black; */
+  margin: 10px;
+  width: 30px;
+  height: 100px;
+}
