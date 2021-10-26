@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import './App.css';
 
 interface Note{
@@ -7,17 +7,36 @@ interface Note{
 }
 
 const App : React.FC=()=>{
+  let textInputRef = useRef<HTMLInputElement>(null);
 const [state, setstate] = useState<Note[]>([])
 
-function addnote(){
+function addnote(event : React.FormEvent){
+  event.preventDefault();
+  setstate(prevNote => [   { id: Math.random().toString(), note: textInputRef.current!.value },
+    ...prevNote
+  ]);
 
 }
 
+function reset(event : React.FormEvent){
+  event.preventDefault();
+  textInputRef.current!.value =""
+
+}
+
+
+
+
   return<>
   <form onSubmit={addnote}>
-  <input type="text" placeholder="Please enter note"/>
-  <button type="submit" >add note</button>
+  <label htmlFor="comment">Comment</label>
+          <input ref={textInputRef}/>
+      
+          <button>add note</button>
+          <button onClick={reset} type="button">reset</button>
  </form>
+
+ <div className="notes">{state.map((note,index)=> <div key={index}>{note.note}</div>)}</div>
   </>
 }
 
