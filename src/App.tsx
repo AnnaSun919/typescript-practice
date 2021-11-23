@@ -1,9 +1,21 @@
 import React,{useState, useRef} from 'react';
 import './App.css';
 
+type drag = {
+  onDrag: (event: React.FormEvent, index:string) => void;
+};
+
+//status of the notes
+enum planStatus {
+  Plan,
+  Processing,
+  Finished
+  
+}
+
 interface Note{
   id:string;
-  note: string;
+  plan: string;
 }
 
 const App : React.FC=()=>{
@@ -12,11 +24,28 @@ const [state, setstate] = useState<Note[]>([])
 
 function addnote(event : React.FormEvent){
   event.preventDefault();
-  setstate(prevNote => [   { id: Math.random().toString(), note: textInputRef.current!.value },
-    ...prevNote
+  setstate(prevPlan => [   { id: Math.random().toString(), plan: textInputRef.current!.value },
+    ...prevPlan
   ]);
 
 }
+
+function ondragstart(event:any){
+
+  event
+  .dataTransfer
+  .setData('text/plain', event.target.id);
+
+  event
+  .currentTarget
+  .style
+  .backgroundColor = 'yellow';
+ 
+ 
+ 
+
+
+};
 
 const reset = (event: React.FormEvent) =>{
   event.preventDefault()
@@ -34,16 +63,17 @@ const reset = (event: React.FormEvent) =>{
  </form>
  
 
- <div className="notesContainer">{state.map((note,index)=> <div className="notes" key={index}>{note.note}</div>)}</div>
+ <div className="notesContainer">{state.map((plan,index)=> <div id={plan.id} draggable="true" onDrag={(event) =>{ondragstart(event)}} className="notes" key={index}>{plan.plan}</div>)}</div>
  </div>
 
  <div className="category">
  <table >
   <tr >
-    <th>Plan</th>
+    <th >Plan</th>
   </tr>
   <tr>
-  <th className="Plan"></th>
+  <th draggable="true" className="Plan" 
+  ></th>
   </tr>
 </table>
 
@@ -52,7 +82,7 @@ const reset = (event: React.FormEvent) =>{
     <th>Processing</th>
   </tr>
   <tr>
-  <th className="Plan"></th>
+  <th draggable="true" className="Processing"></th>
   </tr>
 </table>
 
@@ -61,7 +91,7 @@ const reset = (event: React.FormEvent) =>{
     <th>Finished</th>
   </tr>
   <tr>
-  <th className="Plan"></th>
+  <th draggable="true" className="Finished"></th>
   </tr>
 </table>
  </div>

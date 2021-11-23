@@ -68,13 +68,11 @@ table{
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 300px;
+  min-height: 300px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-
-th{
-  /* border: 1px solid black; */
-  margin: 10px;
-  width: 30px;
-  height: 100px;
+table th{
+  display: flex;
+  justify-content:center
 }
