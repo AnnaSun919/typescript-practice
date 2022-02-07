@@ -9,41 +9,42 @@ interface Note{
 }
 
 const App : React.FC=()=>{
+
+  //for adding notes 
 let textInputRef = useRef<HTMLInputElement>(null);
+
+//for show notes and drag and drop function 
 const [state, setstate] = useState<Note[]>([])
 const[movingItem, setMovingItem] =useState()
 const [show, setshow] = useState<Note[]>([])
 
+
+//fc for adding notes 
 function addnote(event : React.FormEvent){
   event.preventDefault();
   const plan = textInputRef.current!.value
   setstate(prevPlan => [   { id: Math.random().toString(), plan: plan , projectstate: "plan"},
     ...prevPlan
   ]);
-
   textInputRef.current!.value =""
-
 }
 
 
-
+//fc for setleting drag item 
 function onDragStart(event:any){ 
   setMovingItem(event.target.id )
 };
 
-
+//fc for draging item over 
 function onDragOver(event:React.FormEvent) {
   event.preventDefault();
 }
 
-
+//fc for droping 
 function onDrop(_event:any, status: string){
-  let draggableElement = document!.getElementById!(movingItem!) as HTMLInputElement
-console.log(draggableElement.id)
-  
- 
+  const draggableElement = document!.getElementById!(movingItem!) as HTMLInputElement
 
-  let filtered = state.filter((plan) => {
+  const filtered = state.filter((plan) => {
     return plan.id !== draggableElement.id;
   });
 
@@ -56,12 +57,6 @@ setshow(prevPlan => [   { id:draggableElement.id, plan:draggableElement.innerTex
 
 }
 
-
-
-
-
-
-
   return<>
   <div className="page">
     <div className="addNotesContainer">
@@ -69,7 +64,6 @@ setshow(prevPlan => [   { id:draggableElement.id, plan:draggableElement.innerTex
   <label htmlFor="comment">Note</label>
           <input ref={textInputRef}/>
           <button>add note</button>
-        
  </form>
  
 
